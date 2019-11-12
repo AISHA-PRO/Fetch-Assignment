@@ -55,7 +55,7 @@
                     console.log(json)
                     let postTable = document.getElementById("postTable");
                     
-                    let keyArray = ["userId", "body", "title","id"];
+                    let keyArray = [  "id","title","body","userId",];
                     json.forEach(function(element){
                         let tr = document.createElement("tr");
                         keyArray.forEach(function(key){
@@ -113,15 +113,15 @@
             let titleEdit = document.getElementById("titleEdit");
             let IdEdit = document.getElementById("IdEdit");
             let result2 = document.getElementById("result2");
-            fetch("https://jsonplaceholder.typicode.com/posts/100",
+            fetch(`https://jsonplaceholder.typicode.com/posts/${IdEdit.value}`,
                 {
                     method: 'put',
                     body: JSON.stringify(
                         {
-                            userId: userIdEdit.value,
+                            //userId: userIdEdit.value,
                             body: bodyEdit.value,
                             title: titleEdit.value,
-                            id: IdEdit.value
+                            userId: userIdEdit.value
                         }
                     ),
                     headers: {
@@ -131,12 +131,12 @@
             ).then(response => response.json())
                 .then(json => {
                     console.log(json);
-                    result2.textContent = `Changed data of 100 successfully`;
+                    result2.textContent = `Changed data of ${IdEdit.value} successfully`;
                     result2.style.color = "green";
                 })
                 .catch(e => {
                     console.log("error"); 
-                    result2.textContent = `Changing data of 100 was not successful`;
+                    result2.textContent = `Changing data of ${IdEdit.value} was not successful`;
                     result2.style.color = "red"; 
                 })
         }
